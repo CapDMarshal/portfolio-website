@@ -47,7 +47,7 @@ export function About() {
     <section
       id="about"
       ref={containerRef}
-      className="relative w-full overflow-x-clip py-28 px-6 border-t border-neutral-900/60 bg-neutral-950/20"
+      className="relative w-full overflow-x-clip py-32 px-6 bg-transparent"
     >
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}

@@ -34,7 +34,7 @@ export function Contact() {
     <section
       id="contact"
       ref={containerRef}
-      className="relative w-full overflow-x-clip py-28 px-6 border-t border-neutral-900/60"
+      className="relative w-full overflow-x-clip py-32 px-6 bg-transparent"
     >
       <div className="max-w-4xl mx-auto">
         <motion.div

@@ -36,7 +36,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="w-full border-t border-neutral-900 bg-neutral-950/80 py-12 px-6">
+    <footer className="w-full border-t border-white/[0.05] bg-transparent py-16 px-6">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-neutral-400">
         <div className="flex flex-col items-center md:items-start gap-1">
           <p className="font-medium text-neutral-200">
