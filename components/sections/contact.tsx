@@ -10,7 +10,7 @@ export function Contact() {
   const shouldReduceMotion = useReducedMotion();
 
   const email = "fardilabintang.work@gmail.com";
-  const whatsappUrl = "https://wa.me/628988735324";
+  const whatsappUrl = "https://wa.me/6285178112146?text=Hello%20Fardila,%20I%20would%20like%20to%20discuss%20a%20project.";
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(email);
