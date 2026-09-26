@@ -2,7 +2,7 @@
 
 import React, { useState, useRef } from "react";
 import { motion, useScroll, useTransform, useReducedMotion } from "motion/react";
-import { Check, Copy, MapPin, MessageCircle, MessageSquare, Send } from "lucide-react";
+import { Check, Copy, FileText, MapPin, MessageCircle, MessageSquare, Send } from "lucide-react";
 
 export function Contact() {
   const [copied, setCopied] = useState(false);
@@ -57,13 +57,24 @@ export function Contact() {
             Whether you need an engineer to architect a high-performance web experience, integrate intelligent machine learning models, or lead a frontend team — my inbox is always open.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 mb-10">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 mb-10 flex-wrap">
             <a
               href={`mailto:${email}`}
               className="flex items-center justify-center gap-2 w-full sm:w-auto px-7 py-3.5 rounded-full bg-white text-black font-semibold text-sm hover:bg-neutral-200 transition-all cursor-pointer shadow-lg shadow-white/5"
             >
               <Send className="w-4 h-4" />
               <span>Send Email</span>
+            </a>
+
+            <a
+              href="/assets/CV_Fardila%20Bintang%20Adinata.pdf"
+              download="CV_Fardila_Bintang_Adinata.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3.5 rounded-full border border-neutral-800 bg-neutral-900/80 text-neutral-200 font-medium text-sm hover:border-neutral-700 hover:text-white transition-all cursor-pointer"
+            >
+              <FileText className="w-4 h-4 text-emerald-400" />
+              <span>Download CV</span>
             </a>
 
             <button

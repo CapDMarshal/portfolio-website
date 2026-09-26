@@ -69,13 +69,17 @@ export function Navbar() {
             <span className="text-neutral-400">Available</span>
           </div>
 
-          <button
-            onClick={() => handleScrollTo("#contact")}
+          <a
+            href="/assets/CV_Fardila%20Bintang%20Adinata.pdf"
+            download="CV_Fardila_Bintang_Adinata.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-neutral-800/80 hover:bg-neutral-700 text-neutral-200 transition-colors cursor-pointer"
+            aria-label="Download CV (PDF)"
           >
             <FileText className="w-3 h-3 text-emerald-400" />
             <span>CV</span>
-          </button>
+          </a>
         </div>
       </nav>
     </header>

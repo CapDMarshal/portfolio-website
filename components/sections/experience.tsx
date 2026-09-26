@@ -30,7 +30,7 @@ const EXPERIENCES: RoleExperience[] = [
     role: "Mobile & Web Frontend Developer",
     organization: "Ruumi Digital Sdn Bhd",
     location: "Remote",
-    period: "Active",
+    period: "May 2026 — Present",
     isCurrent: true,
     highlights: [
       "Architect and ship reactive, cross-platform mobile and web interfaces with a focus on buttery 60+ FPS performance.",
