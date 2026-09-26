@@ -4,6 +4,7 @@ import "./globals.css";
 import { SmoothScrollProvider } from "@/components/providers/smooth-scroll";
 import { Navbar } from "@/components/ui/navbar";
 import { Footer } from "@/components/ui/footer";
+import { AmbientParallaxBackground } from "@/components/ui/ambient-parallax-background";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,9 +17,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Creative Developer & Frontend Engineer | Portfolio",
+  title: "Fardila Bintang Adinata (Marshal) — Creative Frontend & AI Engineer",
   description:
-    "High-performance digital experiences built with Next.js App Router, Tailwind CSS v4, Motion, and Lenis.",
+    "Portfolio of Fardila Bintang Adinata (Marshal) — Head of IT Division at UTY Software House, Mobile/Web Frontend Developer at Ruumi Digital Sdn Bhd. Specializing in Next.js 16, React 19, Motion, Lenis, and Applied AI.",
 };
 
 export default function RootLayout({
@@ -31,8 +32,9 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground overflow-x-clip">
+      <body className="min-h-full flex flex-col bg-background text-foreground overflow-x-clip relative">
         <SmoothScrollProvider>
+          <AmbientParallaxBackground />
           <Navbar />
           <div className="flex-1 flex flex-col">{children}</div>
           <Footer />
