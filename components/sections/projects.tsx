@@ -120,18 +120,16 @@ export function Projects() {
     offset: ["start start", "end end"],
   });
 
-  // Horizontal travel across the 7 cards
+  // Horizontal travel across the 7 cards (pure array mapping for compositor execution)
   const x = useTransform(
     scrollYProgress,
     [0, 1],
     shouldReduceMotion ? ["0%", "0%"] : ["0%", "-74%"]
   );
 
-  // Diagonal elevation travel: ONLY on desktop! Flat on mobile so cards stay eye-level
-  const y = useTransform(
-    scrollYProgress,
-    (val) => (isDesktop && !shouldReduceMotion ? -val * 258 : 0)
-  );
+  // Diagonal elevation travel: pure mapped value evaluated on compositor thread
+  const yDesktop = useTransform(scrollYProgress, [0, 1], ["0px", "-258px"]);
+  const y = isDesktop && !shouldReduceMotion ? yDesktop : 0;
 
   // Animated visual progress bar on the left
   const progressBarWidth = useTransform(scrollYProgress, [0, 1], ["8%", "100%"]);
@@ -147,18 +145,18 @@ export function Projects() {
         
         {/* ================================================================ */}
         {/* STREAMLINED RUNWAY RIBBON IN BACKGROUND (Desktop only)            */}
-        {/* Tilted 6deg with parallel linear edge glows                      */}
+        {/* Optimized: No heavy backdrop-blur or 60px shadow for 120 FPS      */}
         {/* ================================================================ */}
         <div
-          className={`hidden lg:block absolute inset-x-0 top-1/2 -translate-y-1/2 h-[660px] w-[140vw] -left-[20vw] bg-neutral-950/80 border-y border-cyan-400/30 backdrop-blur-xl -z-10 transition-transform duration-500 shadow-[0_0_60px_rgba(6,182,212,0.12)] ${
+          className={`hidden lg:block absolute inset-x-0 top-1/2 -translate-y-1/2 h-[660px] w-[140vw] -left-[20vw] bg-[#0a0a0c]/90 border-y border-cyan-400/25 -z-10 transition-transform duration-500 ${
             shouldReduceMotion ? "rotate-0" : "rotate-[6deg]"
           }`}
         >
           {/* Top Linear Backlight matching the runway angle */}
-          <div className="absolute -top-10 inset-x-0 h-20 bg-gradient-to-b from-cyan-400/25 via-emerald-400/10 to-transparent blur-xl pointer-events-none select-none" />
+          <div className="absolute -top-10 inset-x-0 h-20 bg-gradient-to-b from-cyan-400/25 via-emerald-400/10 to-transparent blur-lg pointer-events-none select-none" />
           
           {/* Bottom Linear Backlight matching the runway angle */}
-          <div className="absolute -bottom-10 inset-x-0 h-20 bg-gradient-to-t from-cyan-400/20 via-teal-400/10 to-transparent blur-xl pointer-events-none select-none" />
+          <div className="absolute -bottom-10 inset-x-0 h-20 bg-gradient-to-t from-cyan-400/20 via-teal-400/10 to-transparent blur-lg pointer-events-none select-none" />
         </div>
 
         {/* ================================================================ */}
@@ -170,8 +168,8 @@ export function Projects() {
           {/* LEFT COLUMN: COMPACT HUD ON MOBILE, ELEVATED CARD ON DESKTOP      */}
           {/* ================================================================ */}
           <div className="relative z-30 w-full lg:w-[400px] xl:w-[420px] flex-shrink-0 flex flex-col justify-center py-2 sm:py-5 lg:py-6 pr-0 lg:pr-10 lg:-translate-y-10">
-            {/* Elevated 3D Frosted Card Backing */}
-            <div className="absolute -inset-3 sm:-inset-6 bg-neutral-950/95 backdrop-blur-2xl rounded-2xl lg:rounded-3xl border border-white/[0.08] -z-10 shadow-[0_20px_50px_rgba(0,0,0,0.85)]" />
+            {/* Elevated 3D Card Backing (Optimized solid glass) */}
+            <div className="absolute -inset-3 sm:-inset-6 bg-[#0c0d10]/95 rounded-2xl lg:rounded-3xl border border-white/[0.08] -z-10 shadow-2xl" />
 
             {/* Tag & Mobile Counter on Single Row */}
             <div className="flex items-center justify-between lg:block mb-1 sm:mb-2 lg:mb-3">
@@ -214,9 +212,12 @@ export function Projects() {
 
           {/* ================================================================ */}
           {/* RIGHT COLUMN: HORIZONTALLY SCROLLING RUNWAY CARDS               */}
-          {/* Dual-sided fade mask: 24px on mobile, 150px on desktop           */}
+          {/* Paint isolation + lightweight GPU compositing                     */}
           {/* ================================================================ */}
-          <div className="relative w-full flex-1 h-[450px] sm:h-[500px] lg:h-[620px] overflow-hidden flex items-start lg:items-center ml-0 lg:ml-10 mt-1 sm:mt-3 lg:mt-0 [mask-image:linear-gradient(to_right,transparent_0%,black_24px,black_calc(100%-24px),transparent_100%)] lg:[mask-image:linear-gradient(to_right,transparent_0%,transparent_30px,black_150px,black_calc(100%-150px),transparent_100%)]">
+          <div
+            style={{ contain: "paint" }}
+            className="relative w-full flex-1 h-[450px] sm:h-[500px] lg:h-[620px] overflow-hidden flex items-start lg:items-center ml-0 lg:ml-10 mt-1 sm:mt-3 lg:mt-0 [mask-image:linear-gradient(to_right,transparent_0%,black_24px,black_calc(100%-24px),transparent_100%)] lg:[mask-image:linear-gradient(to_right,transparent_0%,transparent_30px,black_150px,black_calc(100%-150px),transparent_100%)]"
+          >
             <motion.div
               style={{ x, y }}
               className="flex flex-row gap-4 sm:gap-8 items-start will-change-transform pl-2 sm:pl-6 lg:pl-12 pr-28 pt-1 lg:pt-8"
@@ -227,8 +228,8 @@ export function Projects() {
                 return (
                   <div
                     key={project.id}
-                    style={{ transform: `translateY(${elevationOffset}px)` }}
-                    className="flex-shrink-0 transition-transform duration-300"
+                    style={{ transform: `translate3d(0, ${elevationOffset}px, 0)` }}
+                    className="flex-shrink-0"
                   >
                     <ProjectCard
                       project={project}
@@ -256,7 +257,8 @@ function ProjectCard({
 }) {
   return (
     <div
-      className="group relative flex flex-col justify-between w-[85vw] max-w-[340px] sm:w-[370px] lg:w-[390px] h-[430px] sm:h-[460px] lg:h-[470px] rounded-2xl border border-neutral-800/90 bg-neutral-900/85 p-5 sm:p-6 backdrop-blur-md transition-all duration-300 hover:border-neutral-700 hover:bg-neutral-900/95 shadow-[0_20px_50px_rgba(0,0,0,0.7)] select-none"
+      style={{ transform: "translateZ(0)" }}
+      className="group relative flex flex-col justify-between w-[85vw] max-w-[340px] sm:w-[370px] lg:w-[390px] h-[430px] sm:h-[460px] lg:h-[470px] rounded-2xl border border-neutral-800/80 bg-[#121316] p-5 sm:p-6 shadow-xl shadow-black/50 transition-colors duration-200 hover:border-neutral-700 select-none will-change-transform"
     >
       <div>
         {/* Visual Preview Box */}
