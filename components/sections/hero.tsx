@@ -2,7 +2,7 @@
 
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform, useReducedMotion } from "motion/react";
-import { ArrowRight, Award, BrainCircuit, GraduationCap, Zap } from "lucide-react";
+import { ArrowRight, Award, BrainCircuit, Code2, Zap } from "lucide-react";
 import { useLenis } from "@/components/providers/smooth-scroll";
 import { HeroBackground } from "@/components/ui/hero-background";
 
@@ -156,10 +156,10 @@ const METRICS = [
     sub: "Optimized on CPU",
   },
   {
-    icon: GraduationCap,
-    value: "3.68",
-    label: "Academic GPA / 4.00",
-    sub: "Informatics @ UTY",
+    icon: Code2,
+    value: "7+",
+    label: "Shipped Projects",
+    sub: "Web, Mobile & AI",
   },
   {
     icon: BrainCircuit,
@@ -406,7 +406,7 @@ export function Hero() {
       {/* ================================================================ */}
       {/* BOTTOM PROOF METRICS BAR                                         */}
       {/* ================================================================ */}
-      <div className="max-w-7xl mx-auto w-full mt-16 pt-10 border-t border-neutral-900/80 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 text-left">
+      <div className="max-w-7xl mx-auto w-full mt-16 pt-10 border-t border-neutral-900/80 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 text-left justify-center">
         {METRICS.map((metric, i) => {
           const Icon = metric.icon;
           return (
