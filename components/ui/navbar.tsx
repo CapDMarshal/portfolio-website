@@ -1,0 +1,60 @@
+'use client';
+
+import React from "react";
+import Link from "next/link";
+import { useLenis } from "@/components/providers/smooth-scroll";
+
+export function Navbar() {
+  const lenis = useLenis();
+
+  const handleScrollTo = (target: string) => {
+    if (lenis) {
+      lenis.scrollTo(target, { offset: -40, duration: 1.2 });
+    } else {
+      const el = document.querySelector(target);
+      el?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  return (
+    <header className="fixed top-6 inset-x-0 z-50 flex justify-center px-4 pointer-events-none">
+      <nav className="pointer-events-auto flex items-center justify-between gap-6 px-5 py-2.5 rounded-full bg-neutral-900/70 backdrop-blur-md border border-neutral-800 shadow-2xl transition-all hover:border-neutral-700">
+        <Link
+          href="/"
+          className="text-sm font-semibold tracking-tight text-white hover:text-neutral-300 transition-colors"
+        >
+          portfolio<span className="text-emerald-400">.</span>
+        </Link>
+
+        <div className="flex items-center gap-5 text-xs text-neutral-400">
+          <button
+            onClick={() => handleScrollTo("#projects")}
+            className="hover:text-white transition-colors cursor-pointer"
+          >
+            Projects
+          </button>
+          <button
+            onClick={() => handleScrollTo("#experience")}
+            className="hover:text-white transition-colors cursor-pointer"
+          >
+            Experience
+          </button>
+          <button
+            onClick={() => handleScrollTo("#contact")}
+            className="hover:text-white transition-colors cursor-pointer"
+          >
+            Contact
+          </button>
+        </div>
+
+        <div className="hidden sm:flex items-center gap-2 pl-2 border-l border-neutral-800 text-[11px] text-neutral-300 font-medium">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+          </span>
+          <span>Available</span>
+        </div>
+      </nav>
+    </header>
+  );
+}
