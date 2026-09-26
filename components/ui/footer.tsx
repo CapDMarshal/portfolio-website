@@ -24,14 +24,6 @@ function LinkedinIcon({ className }: { className?: string }) {
   );
 }
 
-function TwitterIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-    </svg>
-  );
-}
-
 export function Footer() {
   const lenis = useLenis();
 
@@ -48,16 +40,16 @@ export function Footer() {
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-neutral-400">
         <div className="flex flex-col items-center md:items-start gap-1">
           <p className="font-medium text-neutral-200">
-            Portfolio © {new Date().getFullYear()}
+            Fardila Bintang Adinata (Marshal) © {new Date().getFullYear()}
           </p>
           <p className="text-xs text-neutral-500">
             Crafted with Next.js 16, React 19, Tailwind CSS v4, Motion & Lenis
           </p>
         </div>
 
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-4">
           <a
-            href="https://github.com"
+            href="https://github.com/CapDMarshal"
             target="_blank"
             rel="noopener noreferrer"
             className="p-2 rounded-full hover:bg-neutral-900 hover:text-white transition-colors"
@@ -66,7 +58,7 @@ export function Footer() {
             <GithubIcon className="w-4 h-4" />
           </a>
           <a
-            href="https://linkedin.com"
+            href="https://linkedin.com/in/fardilabintang"
             target="_blank"
             rel="noopener noreferrer"
             className="p-2 rounded-full hover:bg-neutral-900 hover:text-white transition-colors"
@@ -75,16 +67,7 @@ export function Footer() {
             <LinkedinIcon className="w-4 h-4" />
           </a>
           <a
-            href="https://twitter.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-2 rounded-full hover:bg-neutral-900 hover:text-white transition-colors"
-            aria-label="Twitter / X"
-          >
-            <TwitterIcon className="w-4 h-4" />
-          </a>
-          <a
-            href="mailto:hello@example.com"
+            href="mailto:fardilabintang.work@gmail.com"
             className="p-2 rounded-full hover:bg-neutral-900 hover:text-white transition-colors"
             aria-label="Email"
           >
@@ -92,7 +75,7 @@ export function Footer() {
           </a>
           <button
             onClick={scrollToTop}
-            className="ml-4 flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-neutral-800 text-xs font-medium text-neutral-300 hover:border-neutral-700 hover:text-white transition-all cursor-pointer"
+            className="ml-3 flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-neutral-800 text-xs font-medium text-neutral-300 hover:border-neutral-700 hover:text-white transition-all cursor-pointer"
           >
             <span>Top</span>
             <ArrowUp className="w-3.5 h-3.5" />

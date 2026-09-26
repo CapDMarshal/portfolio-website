@@ -16,9 +16,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Creative Developer & Frontend Engineer | Portfolio",
+  title: "Fardila Bintang Adinata (Marshal) — Creative Frontend & AI Engineer",
   description:
-    "High-performance digital experiences built with Next.js App Router, Tailwind CSS v4, Motion, and Lenis.",
+    "Portfolio of Fardila Bintang Adinata (Marshal) — Head of IT Division at UTY Software House, Mobile/Web Frontend Developer at Ruumi Digital Sdn Bhd. Specializing in Next.js 16, React 19, Motion, Lenis, and Applied AI.",
 };
 
 export default function RootLayout({
